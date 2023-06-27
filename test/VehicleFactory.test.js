@@ -22,7 +22,16 @@ describe(`Factory smart contract test`, function(){
     it(`Should add a new Vehicle`, async function(){
         await factory.addVehicle(4, 'red')
         const {wheel, color} = await factory.getVehicle(0)
-        console.log(wheel, color)
+        console.log(wheel, color)        
+    })
+
+    it(`Should add another vehicle`, async function(){
+        await factory.addVehicle(6, 'silver')
+        const carAddress = await factory.vehicles(1)
+        console.log(`Car address ${carAddress}`)
+
+        const c = await ethers.getContractAt('Vehicle', carAddress, owner)
+        console.log(await c.color(), await c.wheel())
     })
 
 })
