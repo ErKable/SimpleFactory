@@ -23,4 +23,15 @@ contract VehicleFactory {
         wheel = v.wheel();
         color = v.color();
     }
+
+    function removeVehicle(uint index) external {
+        require(index < vehicles.length, 'Index out of bound');
+
+        vehicles[index] = vehicles[vehicles.length - 1];
+        vehicles.pop();
+    }
+
+    function getVehiclesLenght() external view returns(uint length) {
+        length = vehicles.length;
+    }
 }

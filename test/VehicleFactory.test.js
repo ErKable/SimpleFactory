@@ -34,4 +34,28 @@ describe(`Factory smart contract test`, function(){
         console.log(await c.color(), await c.wheel())
     })
 
+    it(`Should add and remove a vehicle`, async function(){
+        
+        await factory.addVehicle(2, 'green')
+
+        var length = await factory.getVehiclesLenght()
+        console.log(`Current length ${length}`)
+
+        for(let i = 0; i < length; i ++){
+            const {wheel, color} = await factory.getVehicle(i)
+            console.log(wheel, color) 
+        }
+
+
+        await factory.removeVehicle(0)
+
+        length = await factory.getVehiclesLenght()
+        console.log(`Current length ${length}`)
+
+        for(let i = 0; i < length; i ++){
+            const {wheel, color} = await factory.getVehicle(i)
+            console.log(wheel, color) 
+        }
+    })
+
 })
